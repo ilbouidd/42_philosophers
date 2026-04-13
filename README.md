@@ -37,7 +37,6 @@ Example of output :
 # Resources
 
 ## Important Function:
-```text
+
 http://manpagesfr.free.fr/man/man3/pthread_create.3.html
 
-```
