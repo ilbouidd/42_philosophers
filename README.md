@@ -38,6 +38,6 @@ Example of output :
 
 ## Important Function:
 ```text
-pthread_create: create a thread, divide the main thread. Different from fork that duplicates. 
+http://manpagesfr.free.fr/man/man3/pthread_create.3.html
 
 ```
