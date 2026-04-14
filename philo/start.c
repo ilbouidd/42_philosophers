@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 00:15:01 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/13 00:35:43 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:11:54 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int	init_threads(t_all *data)
 {
 	int	i;
 
+	if (data->nb_philo == 1)
+	{
+		one_philo(&data->philo[0]);
+		return (0);
+	}
 	i = 0;
 	while (i < data->nb_philo)
 	{

@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 06:39:33 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/13 00:42:07 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/04/13 15:38:59 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,4 @@ void	print_value(t_philo *philo, char *str)
 	else if (is_str(str, "think"))
 		printf("%ld %d is thinking\n", timestamp_ms(philo->data), philo->id);
 	pthread_mutex_unlock(&philo->data->print);
-}
+} 

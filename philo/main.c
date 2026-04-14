@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 20:06:56 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/11 14:39:34 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/04/13 11:56:09 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main(int ac, char **av)
 	if (init_mutexes(&data))
 		return (1);
 	if (init_philos(&data))
-		return (destroy_all(&data), 1);
+		return (free_all(&data), 1);
 	if (init_threads(&data))
-		return (destroy_all(&data), 1);
-	destroy_all(&data);
+		return (free_all(&data), 1);
+	free_all(&data);
 	return (0);
 }

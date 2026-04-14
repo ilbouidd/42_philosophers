@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:38:35 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/13 00:37:20 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/04/14 15:58:44 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,20 @@ typedef struct s_all
 long	ft_atoi_philo(const char *nptr);
 int		errors_all(t_all *data);
 void	init_all(t_all *data);
-
 int		init_mutexes(t_all *data);
 int		init_philos(t_all *data);
 int		init_threads(t_all *data);
-
 void	*routine(void *arg);
 void	take_forks(t_philo *philo);
 void	drop_forks(t_philo *philo);
 void	eat_sleep_think(t_philo *philo);
-
 int		is_finished(t_all *data);
 void	server(t_all *data);
-
 long	get_time_ms(void);
 long	timestamp_ms(t_all *data);
 void	ft_usleep(size_t time_ms, t_all *data);
-
 void	print_value(t_philo *philo, char *str);
-void	destroy_all(t_all *data);
+void	free_all(t_all *data);
+void    one_philo(t_philo *philo);
 
 #endif

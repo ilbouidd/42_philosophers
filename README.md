@@ -38,5 +38,10 @@ Example of output :
 
 ## Important Function:
 
-http://manpagesfr.free.fr/man/man3/pthread_create.3.html
+pthread_create: http://manpagesfr.free.fr/man/man3/pthread_create.3.html
 
+pthread_detach: http://manpagesfr.free.fr/man/man3/pthread_detach.3.html
+
+pthread_join: http://manpagesfr.free.fr/man/man3/pthread_join.3.html
+
+pthread_mutex: http://manpagesfr.free.fr/man/man3/pthread_mutex_init.3.html

@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:12:54 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/13 00:16:24 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/04/14 15:33:57 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	eat_sleep_think(t_philo *philo)
 
 void	*routine(void *arg)
 {
-	t_philo	*philo;
+	t_philo *philo;
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2)

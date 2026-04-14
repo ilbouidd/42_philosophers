@@ -6,6 +6,7 @@ SRCS =	main.c		\
 		server.c	\
 		print.c		\
 		clean.c		\
+		one_philo.c	\
 
 CC = cc -Wall -Werror -Wextra
 
