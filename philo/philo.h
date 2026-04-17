@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:38:35 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/17 10:46:37 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/04/17 11:52:50 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_all
 	size_t			time_die;
 	size_t			time_eat;
 	size_t			time_sleep;
-	size_t			time_must_eat;
+	int				time_must_eat;
 	int				end;
 	pthread_mutex_t	print;
 	pthread_mutex_t	end_mutex;
@@ -63,8 +63,8 @@ void	drop_forks(t_philo *philo);
 void	eat_sleep_think(t_philo *philo);
 int		is_finished(t_all *data);
 void	server(t_all *data);
-long	get_time_ms(void);
-long	timestamp_ms(t_all *data);
+size_t	get_time_ms(void);
+size_t	timestamp_ms(t_all *data);
 void	ft_usleep(size_t time_ms, t_all *data);
 void	print_value(t_philo *philo, char *str);
 void	free_all(t_all *data);

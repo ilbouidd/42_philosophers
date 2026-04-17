@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 08:33:14 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/11 14:40:21 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/04/17 11:10:11 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ long	ft_atoi_philo(const char *nptr)
 	return (res);
 }
 
-long	get_time_ms(void)
+size_t	get_time_ms(void)
 {
 	struct timeval	tv;
 
@@ -41,19 +41,19 @@ long	get_time_ms(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-long	timestamp_ms(t_all *data)
+size_t	timestamp_ms(t_all *data)
 {
 	return (get_time_ms() - data->start_time);
 }
 
 void	ft_usleep(size_t time_ms, t_all *data)
 {
-	long	start;
+	size_t	start;
 
 	start = get_time_ms();
 	while (!is_finished(data))
 	{
-		if ((get_time_ms() - start) >= (long)time_ms)
+		if ((get_time_ms() - start) >= (size_t)time_ms)
 			break ;
 		usleep(500);
 	}

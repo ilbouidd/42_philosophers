@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:12:54 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/17 10:50:51 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/04/17 11:53:13 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	*routine(void *arg)
 	{
 		eat_sleep_think(philo);
 		if (philo->data->time_must_eat > 0
-			&& philo->meals >= (int)philo->data->time_must_eat)
+			&& philo->meals >= philo->data->time_must_eat)
 			break ;
 	}
 	return (NULL);
