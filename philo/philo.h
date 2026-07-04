@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:38:35 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/17 11:52:50 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/06/29 05:33:59 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void	ft_usleep(size_t time_ms, t_all *data);
 void	print_value(t_philo *philo, char *str);
 void	free_all(t_all *data);
 void	one_philo(t_philo *philo);
+int	philo_dead(t_philo *philo);
 
 #endif
