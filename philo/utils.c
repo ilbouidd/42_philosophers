@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 08:33:14 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/17 11:10:11 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/08/15 11:42:57 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,16 @@ void	ft_usleep(size_t time_ms, t_all *data)
 			break ;
 		usleep(500);
 	}
+}
+
+int	meal_limit_reached(t_philo *philo)
+{
+	int	meals;
+
+	if (philo->data->time_must_eat <= 0)
+		return (0);
+	pthread_mutex_lock(&philo->data->meal_mutex);
+	meals = philo->meals;
+	pthread_mutex_unlock(&philo->data->meal_mutex);
+	return (meals >= philo->data->time_must_eat);
 }

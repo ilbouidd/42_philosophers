@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:20:40 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/06/29 05:34:33 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/08/15 12:35:42 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,6 @@ int	is_finished(t_all *data)
 	return (end);
 }
 
-
-// static int	philo_dead(t_philo *philo)
-// {
-// 	long	now;
-// 	long	last_meal;
-
-// 	pthread_mutex_lock(&philo->data->meal_mutex);
-// 	last_meal = philo->last_meal;
-// 	pthread_mutex_unlock(&philo->data->meal_mutex);
-// 	now = get_time_ms();
-// 	if (now - last_meal >= (long)philo->data->time_die)
-// 	{
-// 		pthread_mutex_lock(&philo->data->end_mutex);
-// 		philo->data->end = 1;
-// 		pthread_mutex_unlock(&philo->data->end_mutex);
-// 		pthread_mutex_lock(&philo->data->print);
-// 		printf("%ld %d died\n", timestamp_ms(philo->data), philo->id);
-// 		pthread_mutex_unlock(&philo->data->print);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
 int	philo_dead(t_philo *philo)
 {
 	long	now;
@@ -54,20 +31,18 @@ int	philo_dead(t_philo *philo)
 	last_meal = philo->last_meal;
 	pthread_mutex_unlock(&philo->data->meal_mutex);
 	now = get_time_ms();
-	if (now - last_meal > (long)philo->data->time_die)
+	if (now - last_meal < (long)philo->data->time_die)
+		return (0);
+	pthread_mutex_lock(&philo->data->end_mutex);
+	if (philo->data->end)
 	{
-		pthread_mutex_lock(&philo->data->end_mutex);
-		if (philo->data->end)
-		{
-			pthread_mutex_unlock(&philo->data->end_mutex);
-			return (1);
-		}
-		philo->data->end = 1;
 		pthread_mutex_unlock(&philo->data->end_mutex);
-		print_value(philo, "died");
 		return (1);
 	}
-	return (0);
+	philo->data->end = 1;
+	pthread_mutex_unlock(&philo->data->end_mutex);
+	print_value(philo, "died");
+	return (1);
 }
 
 static int	good_time_must_eat(t_all *data)

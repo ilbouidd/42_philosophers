@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:12:54 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/17 11:53:13 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/08/15 12:13:10 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 void	take_forks(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
+	pthread_mutex_t	*first;
+	pthread_mutex_t	*second;
+
+	if (philo->left_fork < philo->right_fork)
 	{
-		pthread_mutex_lock(philo->left_fork);
-		print_value(philo, "fork");
-		pthread_mutex_lock(philo->right_fork);
-		print_value(philo, "fork");
+		first = philo->left_fork;
+		second = philo->right_fork;
 	}
 	else
 	{
-		pthread_mutex_lock(philo->right_fork);
-		print_value(philo, "fork");
-		pthread_mutex_lock(philo->left_fork);
-		print_value(philo, "fork");
+		first = philo->right_fork;
+		second = philo->left_fork;
 	}
+	pthread_mutex_lock(first);
+	print_value(philo, "fork");
+	pthread_mutex_lock(second);
+	print_value(philo, "fork");
 }
 
 void	drop_forks(t_philo *philo)
@@ -65,10 +68,9 @@ void	*routine(void *arg)
 		usleep(1000);
 	while (!is_finished(philo->data))
 	{
-		eat_sleep_think(philo);
-		if (philo->data->time_must_eat > 0
-			&& philo->meals >= philo->data->time_must_eat)
+		if (meal_limit_reached(philo))
 			break ;
+		eat_sleep_think(philo);
 	}
 	return (NULL);
 }
