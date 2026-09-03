@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 00:15:01 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/04/17 10:51:20 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/03 09:31:36 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	init_all(t_all *data)
 	data->time_sleep = ft_atoi_philo(data->av[4]);
 	data->time_must_eat = 0;
 	data->end = 0;
-	data->forks = NULL;
+	data->fork_taken = NULL;
+	data->fork_turn = NULL;
+	data->philo_waiting = NULL;
 	data->philo = NULL;
 	if (data->ac == 6)
 		data->time_must_eat = ft_atoi_philo(data->av[5]);
@@ -30,8 +32,10 @@ int	init_mutexes(t_all *data)
 {
 	int	i;
 
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
-	if (!data->forks)
+	data->fork_taken = malloc(sizeof(int) * data->nb_philo);
+	data->fork_turn = malloc(sizeof(int) * data->nb_philo);
+	data->philo_waiting = malloc(sizeof(int) * data->nb_philo);
+	if (!data->fork_taken || !data->fork_turn || !data->philo_waiting)
 		return (1);
 	if (pthread_mutex_init(&data->print, NULL))
 		return (1);
@@ -39,12 +43,14 @@ int	init_mutexes(t_all *data)
 		return (1);
 	if (pthread_mutex_init(&data->meal_mutex, NULL))
 		return (1);
+	if (pthread_mutex_init(&data->forks_lock, NULL))
+		return (1);
 	i = 0;
-	while (i < data->nb_philo)
+	while (i++ < data->nb_philo)
 	{
-		if (pthread_mutex_init(&data->forks[i], NULL))
-			return (1);
-		i++;
+		data->fork_taken[i] = 0;
+		data->fork_turn[i] = 0;
+		data->philo_waiting[i] = 0;
 	}
 	return (0);
 }
@@ -64,8 +70,8 @@ int	init_philos(t_all *data)
 		data->philo[i].meals = 0;
 		data->philo[i].last_meal = data->start_time;
 		data->philo[i].data = data;
-		data->philo[i].left_fork = &data->forks[i];
-		data->philo[i].right_fork = &data->forks[(i + 1) % data->nb_philo];
+		data->philo[i].left_fork = i;
+		data->philo[i].right_fork = (i + 1) % data->nb_philo;
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ilbouidd <ilbouidd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/11 14:38:35 by ilbouidd          #+#    #+#             */
-/*   Updated: 2026/08/15 11:43:08 by ilbouidd         ###   ########.fr       */
+/*   Updated: 2026/09/03 11:41:21 by ilbouidd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_philo
 	int				meals;
 	long			last_meal;
 	pthread_t		thread;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	int				left_fork;
+	int				right_fork;
 	t_all			*data;
 }	t_philo;
 
@@ -47,7 +47,10 @@ typedef struct s_all
 	pthread_mutex_t	print;
 	pthread_mutex_t	end_mutex;
 	pthread_mutex_t	meal_mutex;
-	pthread_mutex_t	*forks;
+	pthread_mutex_t	forks_lock;
+	int				*fork_taken;
+	int				*fork_turn;
+	int				*philo_waiting;
 	t_philo			*philo;
 }	t_all;
 
@@ -58,7 +61,7 @@ int		init_mutexes(t_all *data);
 int		init_philos(t_all *data);
 int		init_threads(t_all *data);
 void	*routine(void *arg);
-void	take_forks(t_philo *philo);
+int		take_forks(t_philo *philo);
 void	drop_forks(t_philo *philo);
 void	eat_sleep_think(t_philo *philo);
 int		is_finished(t_all *data);
@@ -69,7 +72,10 @@ void	ft_usleep(size_t time_ms, t_all *data);
 void	print_value(t_philo *philo, char *str);
 void	free_all(t_all *data);
 void	one_philo(t_philo *philo);
-int	philo_dead(t_philo *philo);
-int	meal_limit_reached(t_philo *philo);
+int		philo_dead(t_philo *philo);
+int		meal_limit_reached(t_philo *philo);
+int		fork_available(t_all *data, t_philo *philo, int fork, int rival);
+int		forks_free(t_philo *philo);
+int		try_take_forks(t_philo *philo);
 
 #endif
